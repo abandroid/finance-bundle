@@ -13,6 +13,7 @@
     ],
     "require": {
         "php": ">=7.1",
+        "smalot/pdfparser": "^0.14.0",
         "symfony/framework-bundle": "^3.4|^4.0",
         "symfony/twig-bundle": "^3.4|^4.0",
         "symfony/yaml": "^3.4|^4.0"
