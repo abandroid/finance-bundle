@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Endroid\FinanceBundle\:
+        resource: '../../../src/*'
+
+    Endroid\FinanceBundle\Controller\:
+        resource: '../../Controller'
+        tags: ['controller.service_arguments']

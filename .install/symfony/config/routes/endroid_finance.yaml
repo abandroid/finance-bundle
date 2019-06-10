@@ -1,0 +1,3 @@
+endroid_finance:
+    resource: "@EndroidFinanceBundle/Resources/config/routes.yaml"
+    prefix: /finance

@@ -1,0 +1,38 @@
+{
+    "name": "endroid/finance-bundle",
+    "description": "Endroid Finance Bundle",
+    "keywords": ["endroid", "finance", "symfony", "bundle", "php"],
+    "homepage": "https://github.com/endroid/finance-bundle",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jeroen van den Enden",
+            "email": "info@endroid.nl"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "symfony/framework-bundle": "^3.4|^4.0",
+        "symfony/twig-bundle": "^3.4|^4.0",
+        "symfony/yaml": "^3.4|^4.0"
+    },
+    "require-dev": {
+        "endroid/bundle-test": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Endroid\\FinanceBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Endroid\\FinanceBundle\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        }
+    }
+}
