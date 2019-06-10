@@ -31,4 +31,15 @@ class TransactionCollection
             yield $transaction;
         }
     }
+
+    public function getTotal(): float
+    {
+        $total = 0;
+
+        foreach ($this->transactions as $transaction) {
+            $total += $transaction->getAmount();
+        }
+
+        return $total;
+    }
 }

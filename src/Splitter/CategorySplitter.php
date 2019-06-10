@@ -32,12 +32,12 @@ class CategorySplitter
 
     private function getCategory(string $description): string
     {
-        $description = trim($description);
+        $description = trim(strtolower($description));
 
-        foreach ($this->categories as $categoryLabel => $category) {
-            foreach ($category as $substring) {
+        foreach ($this->categories as $category) {
+            foreach ($category['terms'] as $substring) {
                 if (strpos($description, $substring) !== false) {
-                    return $categoryLabel;
+                    return $category['name'];
                 }
             }
         }

@@ -18,35 +18,17 @@ final class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
+        $treeBuilder = new TreeBuilder('endroid_finance');
 
-        $treeBuilder
-            ->root('endroid_budget')
-                ->children()
-                    ->booleanNode('disable_delivery')->defaultFalse()->end()
-                    ->arrayNode('delivery_phone_numbers')
-                        ->prototype('scalar')->end()
-                    ->end()
-                    ->scalarNode('product_token')->isRequired()->end()
-                    ->arrayNode('defaults')
+        $treeBuilder->getRootNode()
+            ->children()
+                ->arrayNode('categories')
+                    ->arrayPrototype()
                         ->children()
-                            ->scalarNode('unicode')
-                                ->validate()
-                                ->ifNotInArray(Client::getUnicodeOptions())
-                                    ->thenInvalid('Invalid unicode mode %s, choose one from ["'.implode('", "', Client::getUnicodeOptions()).'"]')
-                                ->end()
+                            ->scalarNode('name')->end()
+                            ->arrayNode('terms')
+                                ->scalarPrototype()->end()
                             ->end()
-                            ->scalarNode('sender')
-                                ->validate()
-                                ->always(function ($sender) {
-                                    Client::assertValidSender($sender);
-
-                                    return $sender;
-                                })
-                                ->end()
-                            ->end()
-                            ->integerNode('minimum_number_of_message_parts')->min(1)->end()
-                            ->integerNode('maximum_number_of_message_parts')->end()
                         ->end()
                     ->end()
                 ->end()

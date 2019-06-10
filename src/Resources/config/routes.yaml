@@ -1,15 +1,3 @@
 finance_dashboard:
     path: /
-    controller: Endroid\CmSmsBundle\Controller\DashboardController
-
-cm_sms_message_list:
-    path: /message
-    controller: Endroid\CmSmsBundle\Controller\MessageListController
-
-cm_sms_message_send:
-    path: /message/send/{phoneNumber}
-    controller: Endroid\CmSmsBundle\Controller\MessageSendController
-
-cm_sms_status_update:
-    path: /status/update
-    controller: Endroid\CmSmsBundle\Controller\StatusUpdateController
+    controller: Endroid\FinanceBundle\Controller\DashboardController

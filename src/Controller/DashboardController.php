@@ -39,20 +39,18 @@ class DashboardController
 
     public function __invoke(Request $request): Response
     {
+        $transactions = [];
+
         if ($request->files->has('file')) {
             $transactions = $this->loader->load($request->files->get('file')->getPathname());
             $transactions = $this->categorySplitter->split($transactions);
             foreach ($transactions as $categoryLabel => &$categoryTransactions) {
                 $categoryTransactions = $this->monthSplitter->split($categoryTransactions);
             }
-
-            dump($categoryTransactions);
-            die;
         }
 
         return new Response($this->renderer->render('@EndroidFinance/dashboard.html.twig', [
-            'transactions' => $this->transactions,
-            'totals' => $this->totals,
+            'transactions' => $transactions,
         ]));
     }
 

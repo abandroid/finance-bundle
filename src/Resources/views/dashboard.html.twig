@@ -1,4 +1,4 @@
-{% extends '@EndroidFinance/base.html.twig' %}
+{% extends '@EndroidFinance/layout.html.twig' %}
 
 {% block title %}Finance - {{ parent() }}{% endblock %}
 
@@ -8,52 +8,48 @@
 
     <h1>Finance</h1>
 
-    {% for monthLabel, month in transactions %}
+    {% for category, categoryTransactions in transactions %}
 
-        <h2>{{ monthLabel }}</h2>
+        <h2>{{ category }}</h2>
 
-        {% if category.monthTotals|length > 1 %}
-
-            <canvas id="category_{{ loop.index }}"></canvas>
-            <script>
-                var category_{{ loop.index }}_data = {
-                    labels : [{{ category.monthLabels|reverse|join(",") }}],
-                    datasets : [
-                        {
-                            fillColor : "rgba(172,194,255,0.4)",
-                            strokeColor : "#ACC29D",
-                            pointColor : "#fff",
-                            pointStrokeColor : "#9DB89D",
-                            data : [{{ category.monthTotals|reverse|join(",") }}]
-                        }
-                    ]
-                };
-                var category_{{ loop.index }} = document.getElementById('category_{{ loop.index }}').getContext('2d');
-                new Chart(category_{{ loop.index }}).Line(category_{{ loop.index }}_data);
-            </script>
-            <br /><br />
-
-        {% endif %}
+        <canvas id="category_{{ loop.index }}"></canvas>
+        <script>
+            var category_{{ loop.index }}_data = {
+                labels : ["{{ categoryTransactions|keys|join("\",\"")|raw }}"],
+                datasets : [
+                    {
+                        fillColor : "rgba(172,194,255,0.4)",
+                        strokeColor : "#ACC29D",
+                        pointColor : "#fff",
+                        pointStrokeColor : "#9DB89D",
+                        data : [{% for transactions in categoryTransactions %}"{{ transactions.total }}"{% if not loop.last %},{% endif %}{% endfor %}]
+                    }
+                ]
+            };
+            var category_{{ loop.index }} = document.getElementById('category_{{ loop.index }}').getContext('2d');
+			new Chart(category_{{ loop.index }}, { type: 'line', data: category_{{ loop.index }}_data });
+        </script>
+        <br /><br />
 
         <table class="table table-striped invoice-table">
             <tbody>
-                {% for monthLabel, month in category.months %}
+                {% for month, monthTransactions in categoryTransactions %}
                     <tr>
-                        <td width="80px">{{ monthLabel }}</td>
+                        <td width="80px">{{ month }}</td>
                         <td>
                             <a href="#" onclick="$('#transactions_{{ loop.index }}_{{ loop.parent.loop.index }}').toggle(); return false;">Details</a>
-                            <table id="transactions_{{ loop.index }}_{{ loop.parent.loop.index }}" style="display: none; font-size: 9px;">
-                                {% for transaction in month.transactions %}
+                            <table id="transactions_{{ loop.index }}_{{ loop.parent.loop.index }}" >
+                                {% for transaction in monthTransactions.iterator %}
                                     <tr>
-                                        <td>{{ transaction[0] }}</td>
-                                        <td>{{ transaction[8] }}</td>
-                                        <td>{{ transaction[5] }}</td>
-                                        <td align="right">{{ transaction[6] }}</td>
+                                        <td>{{ transaction.date|date('Y-m-d') }}</td>
+                                        <td>{{ transaction.description }}</td>
+                                        <td></td>
+                                        <td align="right">{{ transaction.amount }}</td>
                                     </tr>
                                 {% endfor %}
                             </table>
                         </td>
-                        <td width="80px" align="right">{{ month.total|number_format(2, '.', ',') }}</td>
+                        <td width="80px" align="right">{{ monthTransactions.total }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -63,7 +59,7 @@
 
     {% endfor %}
 
-    <form action="{{ path('endroid_play_budget_index') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ path('finance_dashboard') }}" method="post" enctype="multipart/form-data">
         <p>
             <label for="file">Select a file</label> <input type="file" name="file" id="file"> <br />
             <button>Upload File</button>
