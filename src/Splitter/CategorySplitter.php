@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Endroid\FinanceBundle\Splitter;
 
 use Endroid\FinanceBundle\Entity\Transaction;
@@ -36,7 +38,7 @@ class CategorySplitter
 
         foreach ($this->categories as $category) {
             foreach ($category['terms'] as $substring) {
-                if (strpos($description, $substring) !== false) {
+                if (false !== strpos($description, $substring)) {
                     return $category['name'];
                 }
             }

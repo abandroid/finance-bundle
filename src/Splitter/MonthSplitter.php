@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Endroid\FinanceBundle\Splitter;
 
 use Endroid\FinanceBundle\Entity\Transaction;

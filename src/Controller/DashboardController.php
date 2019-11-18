@@ -53,9 +53,4 @@ class DashboardController
             'transactions' => $transactions,
         ]));
     }
-
-
-
-
-
 }

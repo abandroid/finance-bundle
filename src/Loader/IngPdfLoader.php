@@ -33,7 +33,7 @@ class IngPdfLoader
                 do {
                     $description = array_pop($lines);
                     $parts = explode("\t", $description);
-                } while (count($parts) !== 3 && count($lines) > 0);
+                } while (3 !== count($parts) && count($lines) > 0);
                 $transaction = new Transaction($date, $parts[2], (float) str_replace([' ', '.', ','], ['', '', '.'], $parts[1]));
                 $transactions->add($transaction);
             }
