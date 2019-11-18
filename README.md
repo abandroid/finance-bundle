@@ -3,7 +3,7 @@
 *By [endroid](https://endroid.nl/)*
 
 [![Latest Stable Version](http://img.shields.io/packagist/v/endroid/finance-bundle.svg)](https://packagist.org/packages/endroid/finance-bundle)
-[![Build Status](http://img.shields.io/travis/endroid/finance-bundle.svg)](http://travis-ci.org/endroid/finance-bundle)
+[![Build Status](https://github.com/endroid/finance-bundle/workflows/CI/badge.svg)](https://github.com/endroid/finance-bundle/actions)
 [![Total Downloads](http://img.shields.io/packagist/dt/endroid/finance-bundle.svg)](https://packagist.org/packages/endroid/finance-bundle)
 [![Monthly Downloads](http://img.shields.io/packagist/dm/endroid/finance-bundle.svg)](https://packagist.org/packages/endroid/finance-bundle)
 [![License](http://img.shields.io/packagist/l/endroid/finance-bundle.svg)](https://packagist.org/packages/endroid/finance-bundle)
