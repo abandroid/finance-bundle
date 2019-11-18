@@ -19,7 +19,7 @@
         "symfony/yaml": "^3.4||^4.0"
     },
     "require-dev": {
-        "endroid/bundle-test": "dev-master"
+        "endroid/test": "dev-master"
     },
     "autoload": {
         "psr-4": {
